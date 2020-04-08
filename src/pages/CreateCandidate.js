@@ -1,5 +1,5 @@
 import React, { useState, useEffect, } from 'react'
-import { Form, Button, Col, Container, Dropdown } from "react-bootstrap";
+import { Form, Button, Col, Container } from "react-bootstrap";
 
 export default function CreateCandidate() {
     const [newCandidate, setNewCandidate] = useState([]);
@@ -18,7 +18,7 @@ export default function CreateCandidate() {
 
     const postData = async (e) => {
         e.preventDefault();//to block sending a url request
-
+        
         let config = {
             method: "POST",//POST method adds data to the excisting json file
             body: JSON.stringify(newCandidate),
@@ -57,16 +57,6 @@ export default function CreateCandidate() {
                         <Form.Control type="text" onChange={(e) => setNewCandidate({ ...newCandidate, gender: e.target.value })} />
                     </Form.Group>
 
-                    <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Select gender
-                         </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Female</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Male</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-
                 </Form.Row>
 
 
@@ -99,7 +89,7 @@ export default function CreateCandidate() {
                     </Form.Group>
                 </Form.Row>
 
-                <Button variant="primary" type="submit" Link href="/">
+                <Button variant="outline-success" type="submit" Link href="/">
                     Submit
             </Button>
             </Form>

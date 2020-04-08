@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { Form, Button, Row, Col, Card, ListGroup, Container, ListGroupItem } from "react-bootstrap";
-import { faMap, faEdit, faTrash, faUserMd, faMapPin, faEnvelope, faVenusMars, faBriefcase } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Form, Button, Col, Container, } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function CandidatePage(props) {
@@ -13,10 +11,10 @@ export default function CandidatePage(props) {
 
 
     const getSingleCandidate = async () => {
-        let url = `http://localhost:3001/candidates/${id}`
+        let url = `http://localhost:3001/candidates/{id}`
         let response = await fetch(url);
         let result = await response.json();
-        console.log("candidate ", result);
+        console.log("candidate 11", result);
         setCandidate(result)
     }
 
@@ -26,7 +24,7 @@ export default function CandidatePage(props) {
 
     const postData = async (e) => {
         e.preventDefault();//to block sending a url request
-
+        
         let config = {
             method: "PUT",
             body: JSON.stringify(candidate),
@@ -101,7 +99,7 @@ export default function CandidatePage(props) {
                 </Form.Group>
             </Form.Row>
 
-            <Button variant="primary" type="submit">
+                <Button variant="outline-success" type="submit">
                 Submit
             </Button>
         </Form>

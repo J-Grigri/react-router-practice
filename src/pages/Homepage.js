@@ -5,8 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import CreateCandidate from "./pages/CreateCandidate";
 
+import { useDispatch ,useSelector} from 'react-redux'
+import { Link } from 'react-router-dom'
+
+
 export default function Homepage() {
     const [candidates, setCandidates] = useState([]);
+    const user = useSelector(state=>state.user)
+    let dispatch = useDispatch()
+    
 
     useEffect(() => {
         const getCandidates = async () => {
@@ -17,6 +24,8 @@ export default function Homepage() {
         }
         getCandidates();
     }, []);
+
+
     
     const onDeleteCandidate = (id) => {
         try {
@@ -33,9 +42,17 @@ export default function Homepage() {
             console.log("Eror: ", error)
         }
     }
+
+
+    if(candidates.length === 0){
+      return(<h2>
+        Loading...
+        </h2>)  
+    }
     
     return (
         <Container>
+        {console.log("candidate info",candidates)}
             <Row>
                 {candidates.map(candidate => {
                     return (
@@ -69,21 +86,24 @@ export default function Homepage() {
                                             <FontAwesomeIcon icon={faEnvelope} /> {candidate.email}
                                         </ListGroupItem>
                                     </ListGroup>
-                                    <Card.Body>
-                                        <Card.Link href="#" onClick={() => onDeleteCandidate(candidate.id)}>
-                                            <FontAwesomeIcon icon={faTrash} /> Remove
-                                    </Card.Link>
-                                        <Card.Link href={`/CandidatePage/${candidate.id}`}>
-                                            <FontAwesomeIcon icon={faEdit} /> Edit
-                                    </Card.Link>
-                                    </Card.Body>
+                                    
+                                    {user.email === candidate.email ? <Card.Body>
+                                    <Link to="/" onClick={() => onDeleteCandidate(candidate.id)}>
+                                        <FontAwesomeIcon icon={faTrash} /> Remove
+                                    </Link>
+
+                                        <Link to="/CandidatePage/:id" >
+                                        <FontAwesomeIcon icon={faEdit} /> Edit
+                                    </Link>
+                                    </Card.Body>:<></>}
+                                    
                                 </Card>
                             </Col>
                         </div>
                     )
                 }
                 )
-                })}
+                }
             </Row>
         </Container>
     )

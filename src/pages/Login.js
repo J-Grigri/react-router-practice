@@ -21,7 +21,7 @@ export default function Login() {
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control onChange={(e)=>email=e.target.value} type="email" placeholder="Enter email" />
-                </Form.Group>redux react-redux
+                </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
@@ -30,7 +30,7 @@ export default function Login() {
                 <Form.Group controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="outline-success" type="submit">
                     Submit
                 </Button>
             </Form>
